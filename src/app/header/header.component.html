@@ -1,0 +1,13 @@
+<div class="header">
+    <table>
+        <tr>
+            <td><a ><img routerLink="" src="../assets/GMART.png" /></a>
+    </tr>
+      <tr>
+        <td class="phrase">Where you enjoy the most shopping experience</td>
+                    <td  class="buton1" *ngFor="let menu of this.menus" class="col-md-4"  >
+                <button class="button1" routerLink="/{{menu.routerPath}}"  >{{menu.name}}</button>
+            </td>
+      </tr>
+    </table> 
+</div>
