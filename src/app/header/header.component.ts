@@ -1,20 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../service/menu.service';
-import { Menu } from '../model/menu';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
+  imports: [],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  standalone: false
+  styleUrl: './header.component.css',
 })
-export class HeaderComponent implements OnInit  {
-  public menus: Menu[] = []
+export class HeaderComponent {
 
-  constructor(private menuService: MenuService) {
-  }
-
-  ngOnInit(): void {
-      this.menuService.getData().subscribe(data => {this.menus = data; });
-  }
 }
