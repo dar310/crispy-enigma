@@ -1,1 +1,61 @@
-<p>product-detail works!</p>
+<div class="product-detail">
+
+  <button class="back-btn" (click)="goBack()">← Back to Store</button>
+
+  <div class="product-info">
+    <img
+      [src]="selectedImage"
+      [alt]="product?.name"
+      class="product-image"
+    />
+
+    <div class="product-meta">
+      <h1>{{ product?.name }}</h1>
+      <p class="category">{{ product?.categoryName }} • {{ getMediaTypeDisplay() }}</p>
+
+      <p class="price">₱{{ product?.price | number:'1.2-2' }}</p>
+
+      <p class="description">{{ product?.description }}</p>
+
+      <p><strong>Format:</strong> {{ product?.format }}</p>
+      <p><strong>Publisher:</strong> {{ product?.publisher }}</p>
+      <!-- <p><strong>Release Date:</strong> {{ formatDate(product?.releaseDate) }}</p> -->
+      <p><strong>Rating:</strong> {{ product?.ratingAge }}</p>
+
+      <div class="quantity-control">
+        <button (click)="decrementQuantity()">-</button>
+        <input
+            type="number"
+            [(ngModel)]="quantity"
+            min="1"
+            [max]="product?.stockQuantity ?? null">
+
+        <button (click)="incrementQuantity()">+</button>
+      </div>
+
+      <button class="add-cart-btn" (click)="addToCart()" [disabled]="addedToCart">
+        {{ addedToCart ? 'Added!' : 'Add to Cart' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="related-products" *ngIf="relatedProducts.length > 0">
+    <h2>Related Products</h2>
+    <div class="related-grid">
+      <div class="related-item" *ngFor="let related of relatedProducts">
+        <img [src]="getImageUrl(related)" [alt]="related.name">
+        <p>{{ related.name }}</p>
+        <p>₱{{ related.price | number:'1.2-2' }}</p>
+        <button (click)="router.navigate(['/product', related.id])">View</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOADING / ERROR STATES -->
+<ng-template #loadingOrError>
+  <div class="status">
+    <p *ngIf="loading">Loading product details...</p>
+    <p *ngIf="error">{{ error }}</p>
+  </div>
+</ng-template>

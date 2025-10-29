@@ -1,0 +1,147 @@
+<!-- product-card.component.html -->
+
+<!-- GRID LAYOUT (Default) -->
+<div *ngIf="layout === 'grid'" 
+     class="product-card grid-layout"
+     [class.hovered]="isHovered"
+     (mouseenter)="isHovered = true"
+     (mouseleave)="isHovered = false"
+     (click)="viewProduct()">
+  
+  <!-- Image Container -->
+  <div class="image-container">
+    <img [src]="getImageUrl()" [alt]="product.name" class="product-image">
+    
+    <!-- Badges -->
+    <div class="badges">
+      <!-- Media Type Badge -->
+      <span class="badge media-type" [ngClass]="getMediaTypeClass()">
+        {{ getMediaTypeIcon() }} {{ product.mediaType === 'TV_Series' ? 'TV Series' : product.mediaType }}
+      </span>
+      
+      <!-- Format Badge -->
+      <span class="badge format-badge">{{ product.format }}</span>
+    </div>
+
+    <!-- Stock Status Badge -->
+    <div class="stock-badge out-of-stock" *ngIf="!isInStock()">
+      Out of Stock
+    </div>
+    <div class="stock-badge low-stock" *ngIf="isLowStock()">
+      Only {{ product.stockQuantity }} left
+    </div>
+  </div>
+
+  <!-- Product Info -->
+  <div class="product-info">
+    <!-- Category -->
+    <div class="category">{{ product.categoryName }}</div>
+
+    <!-- Product Name -->
+    <h3 class="product-name">{{ product.name }}</h3>
+
+    <!-- Rating
+    <div class="rating" *ngIf="product.rating">
+      <div class="stars">
+        <span *ngFor="let star of getStarArray()" 
+              [class.filled]="star === 1">★</span>
+      </div>
+      <span class="review-count" *ngIf="product.reviewCount">
+        ({{ product.reviewCount }})
+      </span>
+    </div> -->
+
+    <!-- Publisher & Rating Age -->
+    <div class="meta-info">
+      <span class="publisher">{{ product.publisher }}</span>
+      <span class="rating-age">{{ product.ratingAge }}</span>
+    </div>
+
+    <!-- Price -->
+    <div class="price-section">
+      <span class="price">{{ formatPrice() }}</span>
+    </div>
+
+    <!-- Add to Cart Button -->
+    <button *ngIf="showAddToCart" 
+            class="btn-add-to-cart"
+            [disabled]="!isInStock()"
+            (click)="addToCart($event)">
+      <span *ngIf="!addedToCart && isInStock()">Add to Cart</span>
+      <span *ngIf="!addedToCart && !isInStock()">Out of Stock</span>
+      <span *ngIf="addedToCart">✓ Added!</span>
+    </button>
+  </div>
+</div>
+
+<!-- LIST LAYOUT -->
+<div *ngIf="layout === 'list'" 
+     class="product-card list-layout"
+     (click)="viewProduct()">
+  
+  <!-- Image -->
+  <div class="list-image-container">
+    <img [src]="getImageUrl()" [alt]="product.name" class="product-image">
+    
+    <!-- Format Badge -->
+    <div class="format-badge">{{ product.format }}</div>
+  </div>
+
+  <!-- Content -->
+  <div class="list-content">
+    <!-- Header -->
+    <div class="list-header">
+      <div class="category">{{ product.categoryName }}</div>
+      <span class="badge media-type" [ngClass]="getMediaTypeClass()">
+        {{ getMediaTypeDisplay() }}
+      </span>
+    </div>
+
+    <!-- Name -->
+    <h3 class="product-name">{{ product.name }}</h3>
+
+    <!-- Description (truncated) -->
+    <p class="description">{{ product.description }}</p>
+
+    <!-- Rating
+    <div class="rating" *ngIf="product.rating">
+      <div class="stars">
+        <span *ngFor="let star of getStarArray()" 
+              [class.filled]="star === 1">★</span>
+      </div>
+      <span class="review-count" *ngIf="product.reviewCount">
+        ({{ product.reviewCount }} reviews)
+      </span>
+    </div> -->
+
+    <!-- Meta Info -->
+    <div class="meta-info">
+      <span><strong>Publisher:</strong> {{ product.publisher }}</span>
+      <span><strong>Format:</strong> {{ product.format }}</span>
+      <span><strong>Rating:</strong> {{ product.ratingAge }}</span>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="list-actions">
+    <div class="price">{{ formatPrice() }}</div>
+    
+    <div class="stock-info" 
+         [class.in-stock]="isInStock() && !isLowStock()"
+         [class.low-stock]="isLowStock()"
+         [class.out-of-stock]="!isInStock()">
+      <span *ngIf="isInStock() && !isLowStock()">✓ In Stock</span>
+      <span *ngIf="isLowStock()">⚠ Only {{ product.stockQuantity }} left</span>
+      <span *ngIf="!isInStock()">✗ Out of Stock</span>
+    </div>
+
+    <button *ngIf="showAddToCart" 
+            class="btn-add-to-cart"
+            [disabled]="!isInStock()"
+            (click)="addToCart($event)">
+      <span *ngIf="!addedToCart && isInStock()">Add to Cart</span>
+      <span *ngIf="!addedToCart && !isInStock()">Out of Stock</span>
+      <span *ngIf="addedToCart">✓ Added!</span>
+    </button>
+  </div>
+</div>

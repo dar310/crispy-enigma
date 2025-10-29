@@ -1,1 +1,49 @@
-<p>main-body works!</p>
+<!-- <div class="product-grid">
+  <app-product-card 
+    *ngFor="let product of products"
+    [product]="product"
+    [showAddToCart]="true"
+    [layout]="'grid'"
+    (addToCartClicked)="onAddToCart($event)">
+  </app-product-card>
+</div> -->
+<div class="main-body-container">
+  <!-- Category Filter Pills -->
+  <!-- <div class="category-filter">
+    <button 
+      *ngFor="let category of categories"
+      class="category-pill"
+      [class.active]="category.active"
+      (click)="selectCategory(category.name)">
+      {{ category.name }}
+    </button>
+  </div> -->
+
+  <!-- Trending Items Section -->
+  <div class="trending-section">
+    <h1 class="trending-title">Trending Items</h1>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading products...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="error-state">
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="retryLoad()">Retry</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div *ngIf="!loading && !error" class="product-grid">
+      <app-product-card 
+        *ngFor="let product of products"
+        [product]="product"
+        [showAddToCart]="true"
+        [layout]="'grid'"
+        (addToCartClicked)="onAddToCart($event)">
+      </app-product-card>
+    </div>
+  </div>
+</div>

@@ -1,24 +1,10 @@
 import { Routes } from '@angular/router';
-import { MainBodyComponent } from './main-body/main-body.component';
-import { App } from './app';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 export const routes: Routes = [
-    { path: 'test', component: MainBodyComponent },
-    { path: '', component: App }
-    // {
-    //     path: '',
-    //     pathMatch: 'full',
-    //     loadComponent: () =>{
-    //         return import('./main-body/main-body.component').then((m) => m.MainBodyComponent)
-    //     },
-        
-    // },
-    // {
-    //     path: 'test',
-    //     loadComponent: () =>{
-    //         return import('./footer/footer.component').then((m) => m.FooterComponent)
-    //     },
-        
-    // },
+    // { path: 'test', component: ProductDetailComponent },
+    { path: '', component: HomepageComponent},
+    { path: 'product/:id', component: ProductDetailComponent }
 
 ];
