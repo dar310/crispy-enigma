@@ -1,38 +1,75 @@
-  :host {
-    --bright-blue: oklch(51.01% 0.274 263.83);
-    --electric-violet: oklch(53.18% 0.28 296.97);
-    --french-violet: oklch(47.66% 0.246 305.88);
-    --vivid-pink: oklch(69.02% 0.277 332.77);
-    --hot-red: oklch(61.42% 0.238 15.34);
-    --orange-red: oklch(63.32% 0.24 31.68);
 
-    --gray-900: oklch(19.37% 0.006 300.98);
-    --gray-700: oklch(36.98% 0.014 302.71);
-    --gray-400: oklch(70.9% 0.015 304.04);
+:host {
+  /* === OKLCH Teal–Green Brand Palette === */
+  --aqua-blue: oklch(75% 0.20 210);
+  --teal-green: oklch(60% 0.25 180);
+  --sea-green: oklch(55% 0.20 165);
+  --mint: oklch(80% 0.18 155);
+  --lime-green: oklch(70% 0.25 130);
+  --yellow-green: oklch(75% 0.22 115);
 
-    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
-      180deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
+  /* === Neutral Grays === */
+  --gray-950: oklch(12% 0.005 300);
+  --gray-900: oklch(19.37% 0.006 300.98);
+  --gray-700: oklch(36.98% 0.014 302.71);
+  --gray-500: oklch(55% 0.015 303);
+  --gray-300: oklch(78% 0.02 303);
+  --gray-100: oklch(94% 0.01 303);
 
-    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
-      90deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
+  /* === Gradients === */
+  --gradient-horizontal: linear-gradient(
+    90deg,
+    var(--lime-green) 0%,
+    var(--teal-green) 50%,
+    var(--aqua-blue) 100%
+  );
+  --gradient-vertical: linear-gradient(
+    180deg,
+    var(--lime-green) 0%,
+    var(--teal-green) 50%,
+    var(--aqua-blue) 100%
+  );
 
-    --pill-accent: var(--bright-blue);
+  /* === Base Tokens === */
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-soft: 0 3px 8px rgba(0, 0, 0, 0.05);
+  --shadow-strong: 0 5px 15px rgba(0, 0, 0, 0.15);
+  --transition-fast: 0.25s ease-in-out;
 
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  /* === Light Mode Defaults === */
+  --bg-body: var(--gray-100);
+  --bg-surface: #ffffff;
+  --text-main: var(--gray-900);
+  --text-muted: var(--gray-700);
+  --border-color: var(--gray-300);
+
+  /* === Component Accent Colors === */
+  --primary: var(--teal-green);
+  --secondary: var(--aqua-blue);
+  --accent: var(--mint);
+  --danger: var(--lime-green);
+  --warning: var(--yellow-green);
+
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Dark Mode === */
+[data-theme="dark"] {
+  --bg-body: var(--gray-950);
+  --bg-surface: oklch(19% 0.008 301);
+  --text-main: var(--gray-100);
+  --text-muted: var(--gray-500);
+  --border-color: var(--gray-700);
+  --shadow-soft: 0 3px 8px rgba(0, 0, 0, 0.4);
+  --shadow-strong: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
 
   h1 {
     font-size: 3.125rem;

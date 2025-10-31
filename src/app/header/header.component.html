@@ -1,1 +1,30 @@
-<p>header works!</p>
+<header class="header">
+    <div class="left-section">
+        <div class="logo">Game Media Store</div>
+    </div>
+  <div class="center-section">
+      <app-search-and-filter></app-search-and-filter>
+  </div>
+  <div class="right-section">
+    <!-- User Avatar -->
+    <div class="user-container">
+      <div class="user-avatar" (click)="toggleUserMenu()">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/219/219983.png"
+          alt="User"
+        />
+      </div>
+
+      <!-- Dropdown Menu -->
+      @if (showUserMenu()) {
+        <div class="user-dropdown">
+          <button (click)="navigateTo('user')">👤 Profile</button>
+          <button (click)="navigateTo('wishlist')">❤️ Wishlist</button>
+          <button (click)="navigateTo('cart')">🛒 Cart</button>
+          <button (click)="navigateTo('logout')">🚪 Logout</button>
+        </div>
+      }
+    </div>
+  </div>
+</header>
+

@@ -5,21 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../service/product.service';
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  categoryName: string;
-  mediaType: string;  // ProductMediaType enum
-  format: string;     // ProductFormat enum
-  price: number;
-  stockQuantity: number;
-  releaseDate: Date;
-  publisher: string;
-  ratingAge: string;
-  imageFile: string;
-}
+import { Product} from '../model/product';
 
 @Component({
   selector: 'app-product-detail',
@@ -92,7 +78,7 @@ export class ProductDetailComponent implements OnInit{
     this.relatedProducts = [];
     this.loading = true;
     
-    this.productService.getProductById(id).subscribe({
+    this.productService.findById(id).subscribe({
       next: (data) => {
         this.product = data;
         this.selectedImage = this.productService.getProductImageUrl(this.product);

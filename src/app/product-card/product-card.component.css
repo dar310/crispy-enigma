@@ -1,8 +1,8 @@
 /* === Base Card Styles === */
 .product-card {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray-300, #dfe6e3);
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-surface, #fff);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
@@ -10,7 +10,7 @@
 
 .product-card.hovered {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* === Grid Layout === */
@@ -23,7 +23,7 @@
 .image-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;   /* 👈 force square */
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 6px;
 }
@@ -33,9 +33,10 @@
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;     /* crop to fill square without distortion */
+  object-fit: cover;
 }
 
+/* === Badges === */
 .badges {
   position: absolute;
   top: 8px;
@@ -53,14 +54,16 @@
   font-weight: 600;
 }
 
+/* Accent colors converted to teal palette */
 .badge.media-type {
-  background: #1976d2;
+  background: var(--aqua-blue, #0097a7);
 }
 
 .badge.format-badge {
-  background: #388e3c;
+  background: var(--teal-green, #00796b);
 }
 
+/* === Stock Badges === */
 .stock-badge {
   position: absolute;
   bottom: 8px;
@@ -80,13 +83,14 @@
   background: #f57c00;
 }
 
+/* === Product Info === */
 .product-info {
   padding: 12px;
 }
 
 .category {
   font-size: 0.75rem;
-  color: #757575;
+  color: var(--text-muted, #757575);
   margin-bottom: 4px;
   text-transform: uppercase;
 }
@@ -95,21 +99,22 @@
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 8px;
-  color: #212121;
+  color: var(--text-main, #212121);
 }
 
 .meta-info {
   font-size: 0.8rem;
-  color: #616161;
+  color: var(--text-muted, #616161);
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
 }
 
+/* === Price & Button === */
 .price-section {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #2e7d32;
+  color: var(--teal-green, #2e7d32);
   margin-bottom: 8px;
 }
 
@@ -118,7 +123,7 @@
   padding: 8px;
   border: none;
   border-radius: 4px;
-  background: #1976d2;
+  background: var(--teal-green, #009688);
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -126,12 +131,12 @@
 }
 
 .btn-add-to-cart:disabled {
-  background: #9e9e9e;
+  background: var(--gray-500, #9e9e9e);
   cursor: not-allowed;
 }
 
 .btn-add-to-cart:hover:not(:disabled) {
-  background: #1565c0;
+  background: var(--aqua-blue, #00796b);
 }
 
 /* === List Layout === */
@@ -144,8 +149,8 @@
 
 .list-image-container {
   position: relative;
-  flex: 0 0 160px;       /* fixed width */
-  aspect-ratio: 1 / 1;   /* 👈 force square */
+  flex: 0 0 160px;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 6px;
 }
@@ -169,24 +174,27 @@
 
 .list-header .category {
   font-size: 0.75rem;
-  color: #757575;
+  color: var(--text-muted, #757575);
   text-transform: uppercase;
 }
 
 .list-header .badge.media-type {
   font-size: 0.7rem;
   padding: 2px 6px;
+  background: var(--aqua-blue, #0097a7);
 }
 
 .list-content .product-name {
   margin: 0 0 6px;
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--text-main, #212121);
 }
 
+/* === Description & Meta === */
 .description {
   font-size: 0.85rem;
-  color: #424242;
+  color: var(--text-muted, #424242);
   margin-bottom: 8px;
   line-height: 1.3;
   max-height: 3.2em;
@@ -196,12 +204,13 @@
 
 .meta-info {
   font-size: 0.8rem;
-  color: #616161;
+  color: var(--text-muted, #616161);
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
+/* === List Actions === */
 .list-actions {
   display: flex;
   flex-direction: column;
@@ -212,7 +221,7 @@
 .list-actions .price {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #2e7d32;
+  color: var(--teal-green, #2e7d32);
 }
 
 .stock-info {
@@ -221,7 +230,7 @@
 }
 
 .stock-info.in-stock {
-  color: #2e7d32;
+  color: var(--teal-green, #2e7d32);
 }
 
 .stock-info.low-stock {
@@ -235,4 +244,9 @@
 .list-actions .btn-add-to-cart {
   padding: 6px 12px;
   font-size: 0.85rem;
+  background: var(--aqua-blue, #009688);
+}
+
+.list-actions .btn-add-to-cart:hover:not(:disabled) {
+  background: var(--teal-green, #00796b);
 }

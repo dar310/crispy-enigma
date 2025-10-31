@@ -1,0 +1,142 @@
+/* ==============================
+   Header Layout (Grid-based)
+============================== */
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* left | center | right */
+  align-items: center;
+  background: var(--bg-surface, #ffffff);
+  padding: 12px 24px;
+  box-shadow: var(--shadow-soft, 0 2px 10px rgba(0, 0, 0, 0.05));
+  border-radius: 0 0 20px 20px;
+  position: relative;
+  z-index: 100;
+  gap: 20px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ==============================
+   Sections
+============================== */
+.left-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.center-section {
+  justify-content: center;
+  align-items: center;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+/* ==============================
+   Logo with Teal Gradient
+============================== */
+.logo {
+  font-weight: 700;
+  font-size: 1.4rem;
+  background: var(
+    --gradient-horizontal,
+    linear-gradient(
+      90deg,
+      var(--mint-green, oklch(86% 0.14 175)),
+      var(--aqua-blue, oklch(73% 0.17 200)),
+      var(--teal-green, oklch(68% 0.14 170))
+    )
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.25s ease;
+}
+
+.logo:hover {
+  opacity: 0.85;
+}
+
+/* ==============================
+   User Avatar & Dropdown
+============================== */
+.user-container {
+  position: relative;
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid var(--aqua-blue, #2dd4bf);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--teal-green) 25%, transparent);
+  transition: transform 0.15s ease, box-shadow 0.3s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--aqua-blue) 40%, transparent);
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==============================
+   Dropdown Menu
+============================== */
+.user-dropdown {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  background: var(--bg-surface, #fff);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 170px;
+  border: 1px solid color-mix(in srgb, var(--aqua-blue) 15%, transparent);
+  animation: fadeIn 0.15s ease-in-out;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.user-dropdown button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 12px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  color: var(--text-main, #333);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.user-dropdown button:hover {
+  background: color-mix(in srgb, var(--aqua-blue) 10%, transparent);
+  color: var(--teal-green, #14b8a6);
+}
+
+/* ==============================
+   Animations
+============================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

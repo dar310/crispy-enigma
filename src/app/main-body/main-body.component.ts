@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCardComponent } from "../product-card/product-card.component";
-import { Product, ProductService } from '../service/product.service';
+import { ProductService } from '../service/product.service';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { Product } from '../model/product';
 
 @Component({
   selector: 'app-main-body',
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './main-body.component.html',
   styleUrl: './main-body.component.css',
 })
-export class MainBodyComponent implements OnInit {  // ← ADD 'implements OnInit'
+export class MainBodyComponent implements OnInit {
   products: Product[] = [];
   loading = true;
   error = '';
@@ -20,19 +21,32 @@ export class MainBodyComponent implements OnInit {  // ← ADD 'implements OnIni
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router  // ← ADD Router if you need navigation tracking
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     // Load products on init
     this.loadProducts();
-    
-    // Also reload when navigating back from product detail
+
+    // Reload when navigating back from product detail (Angular router)
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.loadProducts();
     });
+
+    // ✅ Fix: Handle browser back (popstate) that doesn't trigger router event
+    window.addEventListener('popstate', () => {
+      console.log('🔙 Browser back detected — reloading products');
+      this.resetState();
+      this.loadProducts();
+    });
+  }
+
+  private resetState(): void {
+    this.products = [];
+    this.loading = true;
+    this.error = '';
   }
 
   loadProducts(): void {
@@ -61,7 +75,6 @@ export class MainBodyComponent implements OnInit {  // ← ADD 'implements OnIni
     }
   }
 
-  // Get random subset of products (for homepage)
   getRandomProducts(count: number = 8): Product[] {
     const shuffled = [...this.products];
     this.shuffleArray(shuffled);
@@ -77,13 +90,11 @@ export class MainBodyComponent implements OnInit {  // ← ADD 'implements OnIni
 
   onAddToCart(product: Product): void {
     console.log('🛒 Adding to cart:', product.name);
-    // TODO: Implement cart service
-    // For now, just show an alert
     alert(`Added "${product.name}" to cart!`);
   }
 
-  // Retry loading products
   retryLoad(): void {
+    this.resetState();
     this.loadProducts();
   }
 }

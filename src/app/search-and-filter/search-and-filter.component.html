@@ -1,1 +1,9 @@
-<p>search-and-filter works!</p>
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Search"
+    [value]="searchQuery()"
+    (input)="onSearchChange($event)"
+    class="search-input"
+  />
+</div>
